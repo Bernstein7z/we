@@ -8,18 +8,25 @@
 :root {
     --body-background: white;
     --nav-background-color: #20232a;
-    --nav-title-color: #61dafb;
+    --nav-title-color: #dedede;
     --nav-p-color: #ffffff;
-    --heading-color: #282c34;
-    --sub-p-color: #6d6d6d;
     --nav-button-color: #dedede;
+    --heading-color: #282c34;
+    --p-color: #101010;
+    --sub-p-color: #6d6d6d;
+    --image-border: 1px solid black;
+    --a-color: #0734de;
 }
 
 [data-theme="dark"] {
     --body-background: #181818;
+    --nav-title-color: #efefef;
     --nav-background-color: #272727;
     --nav-button-color: rgb(180, 136, 245);
+    --p-color: #efefef;
     --sub-p-color: #6d6d6d;
+    --image-border: 1px solid transparent;
+    --a-color: rgb(180, 136, 245);
 }
 
 html {
@@ -34,12 +41,12 @@ nav {
     align-items: center;
 }
 
-nav .heading {
+.heading {
     font-size: 1.4rem;
     color: var(--nav-title-color);;
 }
 
-nav .changer {
+.changer {
     color: var(--nav-button-color);
     background-color: transparent;
     border: 1px solid gray;
@@ -48,7 +55,7 @@ nav .changer {
     transition: all .1s ease-in-out;
 }
 
-nav .changer:hover {
+.changer:hover {
     cursor: pointer;
     transform: scale(1.1);
     color: var(--nav-background-color);
@@ -58,4 +65,52 @@ nav .changer:hover {
 main {
     padding: var(--page-padding);
     height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.info {
+    margin-top: 2rem;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.info picture img {
+    width: 95px;
+    height: 100px;
+    border-radius: 50%;
+    border: var(--image-border);
+}
+
+.desc {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 1.5rem;
+}
+
+.name {
+    flex: 1 0 100%;
+    color: var(--p-color);
+    font-size: 1.5rem;
+}
+
+.sub {
+    flex: 1 0 100%;
+    color: var(--sub-p-color);
+}
+
+.info .desc img {
+    width: 20px;
+    height: 20px;
+
+}
+
+.desc p:not(.name):not(.sub) {
+    color: var(--sub-p-color);
+}
+
+#website {
+    color: var(--a-color);
 }

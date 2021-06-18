@@ -12,4 +12,7 @@ themeChanger.addEventListener('click', event => {
     let theme = document.documentElement.getAttribute('data-theme');
     document.documentElement.setAttribute('data-theme',
         theme === 'dark' ? 'light' : 'dark')
+
+    let img = document.querySelector('#gh-logo');
+    img.src = theme === 'dark' ? 'media/GitHub-light.png' : 'media/GitHub-dark.png';
 })
