@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 
     --page-padding: 1rem 2rem;
 }
@@ -63,14 +64,15 @@ nav {
 }
 
 main {
+    margin-top: 2rem;
     padding: var(--page-padding);
     height: auto;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-flow: row wrap;
 }
 
 .info {
-    margin-top: 2rem;
+    flex: 1 0 100%;
     display: flex;
     flex-flow: row nowrap;
 }
@@ -111,6 +113,25 @@ main {
     color: var(--sub-p-color);
 }
 
-#website {
+.links {
     color: var(--a-color);
+    display: inline;
+}
+
+.articles {
+    flex: 1 0 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-top: 5rem;
+}
+
+.card {
+    display: inline-flex;
+    align-items: flex-start;
+    flex-flow: column nowrap;
+    padding-bottom: 3rem;
+}
+
+.card * {
+    padding: .5rem 0;
 }

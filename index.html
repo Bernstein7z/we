@@ -12,11 +12,11 @@
 
     <body>
         <nav>
-            <p class="heading">Web Engineering</p>
+            <h1 class="heading">Web Engineering</h1>
             <button class="changer">change theme</button>
         </nav>
         <main>
-            <div class="info">
+            <section class="info">
                 <picture>
                     <source srcset="media/info.webp" type="image/webp">
                     <img src="media/info.jpg" alt="Alan Bernstein info image">
@@ -33,12 +33,19 @@
                         </a>
                     </p>
                     <p>
-                        <a id="website" href="https://bernstein.dev" target="_blank" rel="noopener noreferrer">
+                        <a class="links" href="https://bernstein.dev" target="_blank" rel="noopener noreferrer">
                             bernstein.dev
                         </a>
                     </p>
                 </div>
-            </div>
+            </section>
+            <section class="articles">
+                <div class="card">
+                    <p class="name">Einführung</p>
+                    <p class="sub">Power of bare metal HTML</p>
+                    <a class="links" href="solutions/we01/introduction.html">see more</a>
+                </div>
+            </section>
         </main>
     </body>
 </html>
