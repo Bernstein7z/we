@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scale=yes">
+        <title>Grid mobile first</title>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                width: 100vw;
+                height: 100vh;
+                padding: 10px 5px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 20% repeat(2, 1fr) 20%;
+                grid-template-rows: 20% auto;
+                grid-template-areas:
+                    "header header header header"
+                    "t1 main main t2";
+                gap: 10px 5px;
+            }
+
+            header {
+                background-color: red;
+                grid-area: header;
+            }
+
+            main {
+                background-color: blue;
+                grid-area: main;
+            }
+
+            #tag-1 {
+                background-color: green;
+                grid-area: t1;
+            }
+
+            #tag-2 {
+                background-color: blueviolet;
+                grid-area: t2;
+            }
+
+            @media (max-width: 768px) {
+                body {
+                    height: 150vh;
+                    width: 96vw;
+                    grid-template-columns: 20% auto;
+                    grid-template-rows: 10% auto 10%;
+                    grid-template-areas:
+                        "header header"
+                        "t1 main"
+                        "t2 t2";
+                }
+            }
+
+            @media (max-width: 414px) {
+                body {
+                    padding: 0;
+                    height: 200vh;
+                    width: calc(96vw - 20px);
+                    grid-template-columns: 1fr;
+                    grid-template-rows: repeat(2, 10%) auto 10%;
+                    grid-template-areas:
+                        "header"
+                        "t1"
+                        "main"
+                        "t2";
+                    gap: 0;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header></header>
+        <aside id="tag-1"></aside>
+        <main></main>
+        <aside id="tag-2"></aside>
+    </body>
+</html>

@@ -17,6 +17,7 @@
     --sub-p-color: #6d6d6d;
     --image-border: 1px solid black;
     --a-color: #0734de;
+    --image-url: url('../media/GitHub-light.png');
 }
 
 [data-theme="dark"] {
@@ -28,13 +29,14 @@
     --sub-p-color: #6d6d6d;
     --image-border: 1px solid transparent;
     --a-color: rgb(180, 136, 245);
+    --image-url: url('../media/GitHub-dark.png');
 }
 
 html {
     background-color: var(--body-background);
 }
 
-nav {
+header {
     background-color: var(--nav-background-color);
     padding: var(--page-padding);
     display: flex;
@@ -103,35 +105,47 @@ main {
     color: var(--sub-p-color);
 }
 
-.info .desc img {
+.logo {
+    display: block;
     width: 20px;
     height: 20px;
-
+    background-image: var(--image-url);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .desc p:not(.name):not(.sub) {
     color: var(--sub-p-color);
 }
 
+.links-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
 .links {
     color: var(--a-color);
-    display: inline;
+    margin-right: 15px;
 }
 
 .articles {
     flex: 1 0 100%;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(320px, 330px));
+    align-items: center;
+    justify-items: start;
     padding-top: 5rem;
 }
 
 .card {
-    display: inline-flex;
+    display: flex;
     align-items: flex-start;
+    justify-content: flex-start;
     flex-flow: column nowrap;
     padding-bottom: 3rem;
 }
 
 .card * {
     padding: .5rem 0;
+    flex: none;
 }

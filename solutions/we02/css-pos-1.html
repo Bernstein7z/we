@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Übung 2.2 Resizable Image</title>
+        <style>
+            input:not(:checked) ~ .container img {
+                opacity: 0;
+            }
+
+            .container {
+                border: 1px solid black;
+                padding: 5px;
+                width: max(100%, 300px);
+                height: auto;
+            }
+
+            img {
+                width: max(100%, 300px);
+                height: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Übung 2.2</h1>
+        <form>
+            <input type="checkbox" id="check" checked>
+            <label for="check">hide and show via checkbox</label>
+
+            <div class="container">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Hochschule_Bonn-Rhein-Sieg_Wolfgang_G%C3%B6ddertz_Induktion.jpg"
+                     alt="h-brs image"
+                >
+            </div>
+        </form>
+    </body>
+</html>

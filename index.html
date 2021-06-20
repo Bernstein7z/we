@@ -6,15 +6,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="color-scheme" content="dark light">
         <link rel="stylesheet" href="./styles/main.css" type="text/css">
+        <script>
+            (function () {
+                const storage = localStorage.getItem('data-theme');
+                if (storage) {
+                    document.documentElement.setAttribute('data-theme', storage);
+                    return;
+                }
+
+                let theme;
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = 'dark';
+                } else {
+                    theme = 'light';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('data-theme', theme);
+            })();
+        </script>
         <script defer type="text/javascript" src="./scripts/main.js"></script>
         <title>Alan Bernstein - Web Engineering</title>
     </head>
 
     <body>
-        <nav>
+        <header>
             <h1 class="heading">Web Engineering</h1>
             <button class="changer">change theme</button>
-        </nav>
+        </header>
         <main>
             <section class="info">
                 <picture>
@@ -26,10 +44,7 @@
                     <p class="sub">Computer Scientist, BSc</p>
                     <p style="margin-right: 20px">
                         <a href="https://github.com/bernstein7z" target="_blank" rel="noopener noreferrer">
-                            <picture>
-                                <source srcset="media/GitHub-light.png" type="image/png" media="[data-theme=dark]">
-                                <img id="gh-logo" src="media/GitHub-dark.png" alt="Github Mark">
-                            </picture>
+                            <span class="logo" title="github account"></span>
                         </a>
                     </p>
                     <p>
@@ -40,11 +55,29 @@
                 </div>
             </section>
             <section class="articles">
-                <div class="card">
+                <article class="card">
                     <p class="name">Einführung</p>
-                    <p class="sub">Power of bare metal HTML</p>
+                    <p class="sub">Möge die Macht (HTML) mit dir sein</p>
                     <a class="links" href="solutions/we01/introduction.html">see more</a>
-                </div>
+                </article>
+                <article class="card">
+                    <p class="name">CSS 1. Teil</p>
+                    <p class="sub">Lass uns ein wenig auffrischen</p>
+                    <div class="links-container">
+                        <a class="links" href="solutions/we02/css-pos-0.html">pos01</a>
+                        <a class="links" href="solutions/we02/css-pos-1.html">pos02</a>
+                        <a class="links" href="solutions/we02/css-po-wireframe.html">Wireframe</a>
+                    </div>
+                </article>
+                <article class="card">
+                    <p class="name">CSS 2. Teil</p>
+                    <p class="sub">more makeup please</p>
+                    <div class="links-container">
+                        <a class="links" href="solutions/we03/flex.html">flexbox</a>
+                        <a class="links" href="solutions/we03/grid.html">grid</a>
+                        <a class="links" href="solutions/we03/grid-2.html">responsive grid</a>
+                    </div>
+                </article>
             </section>
         </main>
     </body>

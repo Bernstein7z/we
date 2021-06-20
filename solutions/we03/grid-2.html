@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scale=yes">
+        <title>Grid - Wireframe</title>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                height: 100vh;
+                display: grid;
+                grid-template-columns: auto;
+                grid-template-rows: 5% 80% 15%;
+                grid-template-areas:
+                    "header"
+                    "main"
+                    "footer";
+            }
+
+            header {
+                background-color: #1f1f1f;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            a {
+                color: #f5f5f5;
+                text-decoration: none;
+                margin: 0 15px;
+            }
+
+            button {
+                background-color: #eb924b;
+                color: white;
+                padding: 10px 30px;
+                border: none;
+                border-radius: 5px;
+                text-transform: uppercase;
+            }
+
+            main {
+                /*padding: 20px 0;*/
+                display: flex;
+                flex-flow: row wrap;
+                background-color: #ebeae6;
+            }
+
+            main > h1 {
+                flex: 1 0 100%;
+                text-align: center;
+                height: 5%;
+            }
+
+            .image {
+                flex: 1 0 50%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .image > img {
+                flex: 0 0 auto;
+                width: 60%;
+                height: 85%;
+                border: 1px solid black;
+            }
+
+            .info {
+                flex: 1 0 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            .info p:first-of-type {
+                margin-top: 5rem;
+            }
+
+            .info p:not(:first-of-type) {
+                margin-top: 2rem;
+            }
+
+            footer {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-end;
+                background-color: #0e0e0e;
+                color: white;
+                padding-bottom: 10px;
+            }
+
+            footer > button {
+                padding: 10px 80px;
+                margin-bottom: 10px;
+            }
+
+            @media (max-width: 768px) {
+                .image {
+                    align-items: center;
+                    height: 88%;
+                }
+
+                .image > img {
+                    width: 80%;
+                    height: 70%;
+                }
+            }
+
+            @media (max-width: 750px) {
+                body {
+                    grid-template-rows: 10% auto 15%;
+                }
+
+                main {
+                    height: max-content;
+                    flex-flow: column nowrap;
+                    padding: 30px 0;
+                }
+
+                main > h1, .image, .info {
+                    flex: none;
+                    margin: 0;
+                }
+
+                .image {
+                    margin-top: 1rem;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <a href="#">The book series</a>
+            <a href="#">Testimonials</a>
+            <a href="#">The Author</a>
+            <a href="#">Free resources</a>
+        </header>
+        <main>
+            <h1>You dont know JavaScript</h1>
+            <div class="image">
+                <img src="https://kaul.inf.h-brs.de/we/assets/img/landing-img.png" alt="book image">
+            </div>
+            <div class="info">
+                <p>Don't just drift through Javascript</p>
+                <p>Understand how Javascript works</p>
+                <p>Start your journey through the bumpy side of Javascript</p>
+                <button>order your copy now</button>
+            </div>
+        </main>
+        <footer>
+            <p>The first ebook in the book series is absolutely free</p>
+            <button>find out more about this offer</button>
+        </footer>
+    </body>
+</html>

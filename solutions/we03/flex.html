@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scale=yes">
+        <title>Title</title>
+
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                height: 100vh;
+                width: 100vw;
+            }
+
+            body {
+                padding: 1rem 3rem;
+                display: flex;
+                flex-flow: row wrap;
+                align-items: stretch;
+            }
+
+            header {
+                background-color: red;
+                flex: 1 0 100%;
+                height: 20%;
+                margin-bottom: 10px;
+            }
+
+            main, aside {
+                height: 80%;
+            }
+
+            #tag-1, #tag-2 {
+                flex: 0 0 20%;
+            }
+
+            #tag-1 {
+                background-color: green;
+            }
+
+            #tag-2 {
+                background-color: blueviolet;
+            }
+
+            main {
+                background-color: blue;
+                flex: 1 1 auto;
+                margin: 0 10px;
+            }
+
+            @media (max-width: 768px) {
+                html, body {
+                    width: calc(98vw - 10px);
+                }
+
+                main {
+                    flex: 1 1 60%;
+                    margin-right: 0;
+                }
+
+                #tag-1 {
+                    flex: 0 1 30%;
+                }
+
+                main, #tag-1 {
+                    height: 100vh;
+                }
+
+                #tag-2 {
+                    flex: 1 0 100%;
+                    height: 20%;
+                    margin-top: 10px;
+                }
+            }
+
+            @media (max-width: 414px) {
+                body {
+                    padding: 0;
+                }
+
+                header, #tag-1, #tag-2 {
+                    height: 15%;
+                    margin: 0;
+                }
+
+                #tag-1 {
+                    flex: 1 0 100%;
+                }
+
+                main {
+                    height: calc(100vh * 2);
+                    margin: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body>
+        <header></header>
+        <aside id="tag-1"></aside>
+        <main></main>
+        <aside id="tag-2"></aside>
+    </body>
+</html>
