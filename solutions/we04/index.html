@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>JavaScript</title>
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <script>
+            (function () {
+                const storage = localStorage.getItem('data-theme');
+                if (storage) {
+                    document.documentElement.setAttribute('data-theme', storage);
+                    return;
+                }
+
+                let theme;
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = 'dark';
+                } else {
+                    theme = 'light';
+                }
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('data-theme', theme);
+            })();
+        </script>
+    </head>
+    <body>
+        <pre>
+            <code class="language-javascript">
+function main() {
+    console.log('demo');
+}
+            </code>
+        </pre>
+    </body>
+</html>
