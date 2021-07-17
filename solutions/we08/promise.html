@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>fetch data</title>
+    </head>
+    <body style="height: 100%;">
+        <div id="root" style="width: 100%; height: auto;"></div>
+        <script>
+            let a = fetch('./A.txt', {
+                credentials: 'include'
+            })
+                .then(response => response.text());
+
+            let b = fetch('./B.txt', { credentials: 'include' })
+                .then(response => response.text());
+
+            Promise.all([a, b])
+                .then(([first, second]) => {
+                    const root = document.querySelector('#root');
+                    let maxLength = Math.max(first.length, second.length);
+                    first = first.split('\n');
+                    second = second.split('\n');
+
+                    for (let i = 0; i < maxLength; i++) {
+                        let p = document.createElement('p');
+                        let text = '';
+
+                        if (i < first.length) text += first[i];
+                        if (i < second.length) text += second[i];
+
+                        p.textContent = text;
+                        root.appendChild(p);
+                    }
+                });
+        </script>
+    </body>
+</html>
