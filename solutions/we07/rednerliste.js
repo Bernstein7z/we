@@ -2,6 +2,19 @@ const input = document.querySelector('#speaker'),
     addButton = document.querySelector('button[type="submit"]');
 const speakers = {};
 
+input.addEventListener('keypress', event => {
+    if (event.key === 'Enter' && event.target.value.length) {
+        addSpeaker(event.target.value);
+    }
+});
+
+addButton.addEventListener('click', () => {
+    let value = input.value.toLowerCase();
+    if (value.length) {
+        addSpeaker(value);
+    }
+});
+
 const addSpeaker = speaker => {
     if (!Object.keys(speakers).includes(speaker)) {
         speakers[speaker] = {
@@ -16,7 +29,6 @@ const addSpeaker = speaker => {
         span.id = `${ speaker }-li`;
         span.textContent = `${ speaker } 00:00:00 `;
 
-        button.textContent = 'Stopp!';
         button.id = `${ speaker }-btn`;
         button.onclick = clickHandler;
 
@@ -24,17 +36,45 @@ const addSpeaker = speaker => {
         li.appendChild(button);
         document.querySelector('.list').appendChild(li);
 
-        speakers[speaker].intervalID = setInterval(timerCallback, 1000, speaker);
         input.value = '';
-
-        for (const sp of Object.keys(speakers)) {
-            if (sp !== speaker) {
-                speakers[sp].active = false;
-                clearInterval(speakers[sp].intervalID);
-                document.querySelector(`#${ sp }-btn`).textContent = 'Start!';
-            }
-        }
+        speakerHandler(speaker);
     }
+};
+
+const clickHandler = btn => {
+    const id = btn.target.id;
+    const speaker = id.split('-')[0];
+
+    if (speakers[speaker].active) {
+        setSpeakerState({
+            state: false,
+            buttonText: 'Start!',
+            mode: 'clear',
+            name: speaker
+        });
+    } else {
+        speakerHandler(speaker);
+    }
+};
+
+const speakerHandler = name => {
+    for (const sp of Object.keys(speakers)) {
+        let flag = sp !== name;
+        setSpeakerState({
+            state: !flag,
+            buttonText: flag ? 'Start!' : 'Stopp!',
+            mode: flag ? 'clear' : '',
+            name: flag ? sp : name
+        });
+    }
+};
+
+const setSpeakerState = ({ state, buttonText, mode, name }) => {
+    speakers[name].active = state;
+    document.querySelector(`#${ name }-btn`).textContent = buttonText;
+
+    if (mode === 'clear') clearInterval(speakers[name].intervalID);
+    else speakers[name].intervalID = setInterval(timerCallback, 1000, name);
 };
 
 const timerCallback = name => {
@@ -48,39 +88,3 @@ const timerCallback = name => {
         ${ name } ${ hour }:${ minute }:${ second } 
     `;
 };
-
-const clickHandler = btn => {
-    const id = btn.target.id;
-    const speaker = id.split('-')[0];
-
-    if (speakers[speaker].active) {
-        speakers[speaker].active = false;
-        clearInterval(speakers[speaker].intervalID);
-        btn.target.textContent = 'Start!';
-    } else {
-        for (const sp of Object.keys(speakers)) {
-            if (sp !== speaker) {
-                speakers[sp].active = false;
-                clearInterval(speakers[sp].intervalID);
-                document.querySelector(`#${ sp }-btn`).textContent = 'Start!';
-            } else {
-                speakers[speaker].active = true;
-                speakers[speaker].intervalID = setInterval(timerCallback, 1000, speaker);
-                document.querySelector(`#${ sp }-btn`).textContent = 'Stopp!';
-            }
-        }
-    }
-};
-
-input.addEventListener('keypress', event => {
-    if (event.key === 'Enter' && event.target.value.length) {
-        addSpeaker(event.target.value);
-    }
-});
-
-addButton.addEventListener('click', () => {
-    let value = input.value.toLowerCase();
-    if (value.length) {
-        addSpeaker(value);
-    }
-});
