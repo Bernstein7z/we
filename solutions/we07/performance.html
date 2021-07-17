@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Performance Testing</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 50vh;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .item {
+            grid-column: 1/2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div>Test name</div>
+    <div>Execution per second</div>
+    <div class="item createTextNode">createTextNode</div>
+    <div class="item textContent">textContent</div>
+    <div class="item innerText">innerText</div>
+    <div class="item innerHTML">innerHTML</div>
+    <div class="item nodeValue">nodeValue</div>
+</div>
+<script>
+    function create(mode, element, text) {
+        const attributes = {
+            'createTextNode': element.appendChild(document.createTextNode(text)),
+            'textContent': element.textContent = text,
+            'innerText': element.innerText = text,
+            'innerHTML': element.innerHTML = text,
+            'nodeValue': element.nodeValue = text
+        };
+
+        return attributes[mode];
+    }
+
+
+    const attributes = ['createTextNode', 'textContent', 'innerText', 'innerHTML', 'nodeValue'],
+        container = document.querySelector('.container'),
+        dummy = document.createElement('a');
+
+    for (const attribute of attributes) {
+        let element = document.querySelector(`.${ attribute }`),
+            timeDiv = document.createElement('div');
+        timeDiv.classList.add('time');
+
+        let string = `Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi et ipsum libero mollitia
+                      praesentium quaerat veritatis. Ab architecto commodi distinctio est, laboriosam nam quasi
+                      quia! Culpa ea labore libero nihil.`;
+
+        let start = performance.now();
+        create(attribute, dummy, string);
+        let end = performance.now();
+
+        timeDiv.textContent = (end - start).toExponential(5);
+        container.insertBefore(timeDiv, element.nextSibling);
+    }
+</script>
+</body>
+</html>

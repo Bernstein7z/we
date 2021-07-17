@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>ECMAScript</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/styles/default.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.0.1/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script>
+        <script>
+            (function () {const storage = localStorage.getItem('data-theme');if (storage) {
+                document.documentElement.setAttribute('data-theme', storage);return;}
+                let theme;if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    theme = 'dark';} else {theme = 'light';}document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('data-theme', theme);
+            })();
+        </script>
+        <style>
+            .hljs {
+                color: #24292e;
+                background: #fff;
+                /*color: #adbac7;
+                background: #22272e;*/
+            }
+
+            pre {
+                display: flex;
+            }
+
+            pre code.hljs {
+                padding: 1rem 2rem;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Klasse für Vorrangrelationen:</h3>
+        <pre>
+            <code>
+class Vorrang {
+    constructor(edges) {
+        this.edges = edges;
+        this.graph = new Map();
+        this.visits = [];
+        this.q = [];
+    }
+
+    createGraph() {
+        for (const edge of this.edges) {
+            if (!this.visits.includes(edge[0])) {
+                let from = this.dfs(edge[0]);
+                this.graph.set(from.node, { indeg: from.indeg, afters: from.afters });
+                this.visits.push(edge[0]);
+            }
+
+            if (!this.visits.includes(edge[1])) {
+                let to = this.dfs(edge[1]);
+                this.graph.set(to.node, { indeg: to.indeg, afters: to.afters });
+                this.visits.push(edge[1]);
+            }
+        }
+    }
+
+    dfs(node) {
+        let indeg = 0,
+            afters = [];
+
+        for (const edge of this.edges) {
+            if (edge[1] === node)
+                indeg++;
+            if (edge[0] === node)
+                afters.push(edge[1]);
+        }
+
+        return ({ node, indeg, afters });
+    }
+
+    init() {
+        for (const entry of this.graph) {
+            if (entry[1].indeg === 0)
+                this.q.push(entry);
+        }
+    }
+
+    topSort() {
+        this.createGraph();
+        this.init();
+
+        let sorted = [];
+
+        for (const n of this.q) {
+            sorted.push(n[0]);
+
+            for (const node of n[1].afters) {
+                this.graph.get(node).indeg--;
+
+                if (this.graph.get(node).indeg === 0)
+                    this.q.push([node, this.graph.get(node)]);
+            }
+        }
+
+        return sorted;
+    }
+}
+            </code>
+        </pre>
+
+        <h3>Topologischer Generator:</h3>
+        <pre>
+            <code>
+class Vorrang {
+    constructor(edges) {
+        this.edges = edges;
+        this.graph = new Map();
+        this.visits = [];
+        this.q = [];
+    }
+
+    createGraph() {
+        for (const edge of this.edges) {
+            if (!this.visits.includes(edge[0])) {
+                let from = this.dfs(edge[0]);
+                this.graph.set(from.node, { indeg: from.indeg, afters: from.afters });
+                this.visits.push(edge[0]);
+            }
+
+            if (!this.visits.includes(edge[1])) {
+                let to = this.dfs(edge[1]);
+                this.graph.set(to.node, { indeg: to.indeg, afters: to.afters });
+                this.visits.push(edge[1]);
+            }
+        }
+    }
+
+    dfs(node) {
+        let indeg = 0,
+            afters = [];
+
+        for (const edge of this.edges) {
+            if (edge[1] === node)
+                indeg++;
+            if (edge[0] === node)
+                afters.push(edge[1]);
+        }
+
+        return ({ node, indeg, afters });
+    }
+
+    init() {
+        for (const entry of this.graph) {
+            if (entry[1].indeg === 0)
+                this.q.push(entry);
+        }
+    }
+
+    topSort() {
+        this.createGraph();
+        this.init();
+
+        let sorted = [];
+
+        for (const n of this.q) {
+            sorted.push(n[0]);
+
+            for (const node of n[1].afters) {
+                this.graph.get(node).indeg--;
+
+                if (this.graph.get(node).indeg === 0)
+                    this.q.push([node, this.graph.get(node)]);
+            }
+        }
+
+        return sorted;
+    }
+}
+            </code>
+        </pre>
+    </body>
+</html>

@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="color-scheme" content="dark light">
         <link rel="stylesheet" href="./styles/main.css" type="text/css">
+        <link rel="preconnect" href="./solutions/we04/index.html">
         <script>
             (function () {
                 const storage = localStorage.getItem('data-theme');
@@ -13,7 +14,6 @@
                     document.documentElement.setAttribute('data-theme', storage);
                     return;
                 }
-
                 let theme;
                 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
                     theme = 'dark';
@@ -83,6 +83,26 @@
                     <p class="sub">A scripting language controlling the web</p>
                     <div class="links-container">
                         <a class="links" href="solutions/we04/index.html">JavaScript</a>
+                    </div>
+                </article>
+                <article class="card">
+                    <p class="name">ECMAScript</p>
+                    <p class="sub">JavaScript, aber noch besser ?!</p>
+                    <a class="links" href="solutions/we05/index.html">ECMAScript</a>
+                </article>
+                <article class="card">
+                    <p class="name">Funktionale Programmierung</p>
+                    <p class="sub">closure ist Zauberei 😅</p>
+                    <div class="links-container">
+                        <a class="links" href="solutions/we06/index.html">functions</a>
+                    </div>
+                </article>
+                <article class="card">
+                    <p class="name">DOM</p>
+                    <p class="sub">Erbaue die Zukunft</p>
+                    <div class="links-container">
+                        <a class="links" href="solutions/we07/performance.html">Performanzmessungen</a>
+                        <a class="links" href="solutions/we07/render.html">Zeitmessung</a>
                     </div>
                 </article>
             </section>
