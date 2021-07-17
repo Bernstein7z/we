@@ -4,7 +4,7 @@ const speakers = {};
 
 input.addEventListener('keypress', event => {
     if (event.key === 'Enter' && event.target.value.length) {
-        addSpeaker(event.target.value);
+        addSpeaker(event.target.value.toLowerCase());
     }
 });
 
